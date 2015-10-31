@@ -44,7 +44,7 @@ Operator::Operator(string input)
 }
 
 
-double Operator::execute(double rhs)
+const double Operator::execute(double rhs) const
 {
 
     if (category == 'u')
@@ -73,7 +73,7 @@ double Operator::execute(double rhs)
 }
 
 
-double Operator::execute(double lhs, double rhs)
+const double Operator::execute(double lhs, double rhs) const
 {
 
     if (category == 'b')

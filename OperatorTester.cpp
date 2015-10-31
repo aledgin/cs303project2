@@ -80,6 +80,18 @@ int main()
     cout << or.execute(0.5, 0) << endl;
     cout << or.execute(0, 0.5) << endl;
     cout << or.execute(0, 0.0) << endl;
+    cout << "***" << endl;
+    cout << (not < plus) << endl;
+    cout << (not <= plus) << endl;
+    cout << (not == increment) << endl;
+    cout << (not != plus) << endl;
+    cout << (not >= plus) << endl;
+    cout << (not > plus) << endl;
+    cout << not.hasPrecedence() << endl;
+    cout << not.hasType() << endl;
+    cout << not.hasCategory() << endl;
+    cout << (not <= increment) << endl;
+    cout << (not >= increment) << endl;
     system("pause");
     return 0;
 }

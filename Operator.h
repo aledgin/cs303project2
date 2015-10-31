@@ -26,68 +26,74 @@ class Operator
             // the negation operator.
 
 
-        int hasPrecedence() {return precedence;}
+        const int hasPrecedence() const {return precedence;}
         // Preconditions: An operator's numerical precedence is needed.
         // Postconditions: This returns the operator's numerical precedence.
 
 
-        string hasType() {return type;}
+        const string hasType() const {return type;}
         // Preconditions: An operator's type is needed.
         // Postconditions: This returns the string representation of the
             // operator.
 
 
-        char hasCategory() {return category;}
+        const char hasCategory() const {return category;}
         // Preconditions: An operator's category is needed.
         // Postconditions: This returns the category (unary or binary).
 
 
-        bool operator<(Operator rhs) {return precedence < rhs.precedence;}
+        const bool operator<(const Operator& rhs) const
+            {return precedence < rhs.precedence;}
         // Preconditions: Two operators need to be compared for precedence.
         // Postconditions: This returns true if the left-hand-side operator
             // has a lower precedence than the right-hand-side operator.
 
 
-        bool operator<=(Operator rhs) {return precedence < rhs.precedence;}
+        const bool operator<=(const Operator& rhs) const
+            {return precedence <= rhs.precedence;}
         // Preconditions: Two operators need to be compared for precedence.
         // Postconditions: This returns true if the left-hand-side operator
             // has an equal or lower precedence than the right-hand-side
             // operator.
 
 
-        bool operator==(Operator rhs) {return precedence == rhs.precedence;}
+        const bool operator==(const Operator& rhs) const
+            {return precedence == rhs.precedence;}
         // Preconditions: Two operators need to be compared for precedence.
         // Postconditions: This returns true if both operators have the same
             // precedence.
 
 
-        bool operator!=(Operator rhs) {return precedence != rhs.precedence;}
+        const bool operator!=(const Operator& rhs) const
+            {return precedence != rhs.precedence;}
         // Preconditions: Two operators need to be compared for precedence.
         // Postconditions: This returns true if the two operators have
             // different precedencies.
 
 
-        bool operator>=(Operator rhs) {return precedence >= rhs.precedence;}
+        const bool operator>=(const Operator& rhs) const
+            {return precedence >= rhs.precedence;}
         // Preconditions: Two operators need to be compared for precedence.
         // Postconditions: This returns true if the left-hand-side operator
             // has an equal or higher precedence than the right-hand-side
             // operator.
 
 
-        bool operator>(Operator rhs) {return precedence > rhs.precedence;}
+        const bool operator>(const Operator& rhs) const
+            {return precedence > rhs.precedence;}
         // Preconditions: Two operators need to be compared for precedence.
         // Postconditions: This returns true if the left-hand-side operator
             // has a higher precedence than the right-hand-side operator.
 
 
-        double execute(double rhs);
+        const double execute(double rhs) const;
         // Preconditions: An operation needs to be executed based on the
             // given unary operator.
         // Postconditions: This function performs the given arithmetic
             // operation on the given numerical value.
 
 
-        double execute(double lhs, double rhs);
+        const double execute(double lhs, double rhs) const;
         // Preconditions: An operation needs to be executed based on the
             // given binary operator.
         // Postconditions: This function performs the given arithmetic
