@@ -15,7 +15,8 @@ Operator::Operator(string input)
     type = input;
 
     // Set precedence based on input.
-    if ((input == "!") || (input == "++") || (input == "--") || (input == "-"))
+    if ((input == "!") || (input == "++")
+        || (input == "--") || (input == "-#"))
         precedence = 8;
     else if (input == "^")
         precedence = 7;
@@ -61,7 +62,7 @@ double Operator::execute(double rhs)
             return rhs + 1.0;
         else if (type == "--")
             return rhs - 1.0;
-        else // if (type == "-")
+        else // if (type == "-#")
             return -rhs;
 
     }
@@ -84,7 +85,12 @@ double Operator::execute(double lhs, double rhs)
         else if (type == "*")
             return lhs * rhs;
         else if (type == "/")
-            return lhs / rhs;
+        {
+            if (rhs != 0)
+                return lhs / rhs;
+            else
+                throw std::exception("Cannot divide by zero.");
+        }
         else if (type == "%")
             return int(lhs) % int(rhs);
         else if (type == "+")
