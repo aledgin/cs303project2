@@ -47,6 +47,10 @@ int main()
     cout << modulus.execute(5, 2) << endl;
     cout << modulus.execute(5.1, 2.1) << endl;
     Operator plus("+");
+    try
+    {cout << plus.execute(1) << endl;}
+    catch(exception)
+    {cout << "'plus.execute(1)' throws exception as expected." << endl;}
     cout << plus.execute(-0.5, 1.5) << endl;
     cout << plus.execute(1, -2.5) << endl;
     Operator minus("-");
