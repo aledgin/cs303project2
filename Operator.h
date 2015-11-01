@@ -1,5 +1,5 @@
 // Alfred Ledgin
-// 10/30/2015
+// 10/31/2015
 // CS 303
 // Project 2
 
@@ -39,7 +39,8 @@ class Operator
 
         const char hasCategory() const {return category;}
         // Preconditions: An operator's category is needed.
-        // Postconditions: This returns the category (unary or binary).
+        // Postconditions: This returns the category
+            // (unary, binary, or parenthesis).
 
 
         const bool operator<(const Operator& rhs) const
