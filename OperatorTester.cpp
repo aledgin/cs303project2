@@ -1,6 +1,6 @@
 // FOR TESTING ONLY--DO NOT TURN IN
 // Alfred Ledgin
-// 10/30/2015
+// 10/31/2015
 // CS 303
 // Project 2
 
@@ -92,6 +92,20 @@ int main()
     cout << not.hasCategory() << endl;
     cout << (not <= increment) << endl;
     cout << (not >= increment) << endl;
+    cout << "***" << endl;
+    Operator left("(");
+    Operator right(")");
+    cout << (left == right) << endl;
+    cout << (left > not) << endl;
+    cout << (right < not) << endl;
+    try
+    {left.execute(1);}
+    catch(exception)
+    {cout << "'left.execute(1)' throws exception as expected." << endl;}
+    try
+    {right.execute(1, 2);}
+    catch(exception)
+    {cout << "'right.execute(1, 2)' throws exception as expected." << endl;}
     system("pause");
     return 0;
 }

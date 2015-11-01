@@ -1,5 +1,5 @@
 // Alfred Ledgin
-// 10/30/2015
+// 10/31/2015
 // CS 303
 // Project 2
 
@@ -15,7 +15,9 @@ Operator::Operator(string input)
     type = input;
 
     // Set precedence based on input.
-    if ((input == "!") || (input == "++")
+    if ((input == "(") || (input == ")"))
+        precedence = 9;
+    else if ((input == "!") || (input == "++")
         || (input == "--") || (input == "-#"))
         precedence = 8;
     else if (input == "^")
@@ -36,7 +38,9 @@ Operator::Operator(string input)
     else
         throw std::exception("Invalid operator input");
 
-    if (precedence == 8)
+    if (precedence == 9)
+        category = 'p'; // Parentheses have precedence == 9.
+    else if (precedence == 8)
         category = 'u'; // Unary operators have precedence == 8.
     else
         category = 'b'; // Binary operators have precedence < 8.
@@ -67,8 +71,9 @@ const double Operator::execute(double rhs) const
 
     }
 
-    else // Cannot use this function with binary operator.
-        throw std::exception("lhs operand required.");
+    else // Cannot use this function with binary operator or parentheses.
+        throw
+            std::exception("lhs operand required. Cannot execute parentheses");
 
 }
 
@@ -116,7 +121,7 @@ const double Operator::execute(double lhs, double rhs) const
 
     }
 
-    else // Cannot use this function with unary operator.
+    else // Cannot use this function with unary operator or parentheses.
         throw std::exception("Cannot have lhs operand.");
 
 }
