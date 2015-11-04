@@ -10,22 +10,30 @@
 #include "Operator.h"
 using namespace std;
 
+
 class Evaluator {
+
 public:
+
+
 	Evaluator(string line);
+
+
 	Evaluator();
-	double evaluate(); // Alfred modified...
-	bool test();
-	string getValue();
-	double getTotal() {
-		return numbers.top(); // Alfred modified...
-	}
+
+
+    double evaluate(string equation);
+
+
+    double evaluate() { return evaluate(eqString); }
+
+
 private:
-	stack<Operator> opStack;
-    stack<double> numbers; // Alfred added...
-	string equation;
-	string number;
-	int numOfOpenPar;
-	int numOfClosePar;
-	string total;
+
+
+    bool test(); // We need to write this.
+
+
+	string eqString;
+
 };
