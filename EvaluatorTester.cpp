@@ -1,3 +1,4 @@
+// FOR TESTING ONLY--DO NOT TURN IN
 // Alfred Ledgin
 // 11/4/2015
 // CS 303
@@ -10,8 +11,14 @@ using namespace std;
 
 int main()
 {
-    // (1/2) is being evaluated as 0 when using parentheses.  Need to figure out why.
-    Evaluator evtest("2*(1/2)");
+    Evaluator fancy("2*(3*(5+2))");
+    cout << fancy.evaluate() << endl;
+    Evaluator spaces("1 + 1");
+    cout << spaces.evaluate() << endl;
+    Evaluator evhalf("(1/9)");
+    cout << evhalf.evaluate() << endl;
+    // (1/n) is being evaluated as 0 when sub-expression.  Need to figure out why. FIXED!!!!!
+    Evaluator evtest("2+(1/9)");
     cout << evtest.evaluate() << endl;
     Evaluator ev1a("3---2"); // Good!
     cout << ev1a.evaluate() << endl;
@@ -43,6 +50,8 @@ int main()
     cout << ev3.evaluate() << endl;
     Evaluator ev4("1+2*3");
     cout << ev4.evaluate() << endl;
+    Evaluator ev4a("1+(2*3)");
+    cout << ev4a.evaluate() << endl;
     Evaluator ev5("(1+2)*3");
     cout << ev5.evaluate() << endl;
     Evaluator ev6("5/2");
@@ -50,7 +59,7 @@ int main()
     cout << "Note that the result is a double converted to a string.  The final result should be an int (doubles should only be used internally)." << endl;
     Evaluator ev7("9^(1/2)");
     cout << ev7.evaluate() << endl;
-    cout << "Note that \"9^(1/2)\" is incorrectly evaluated as 1." << endl;
+    cout << "Note that \"9^(1/2)\" is incorrectly evaluated as 1. FIXED" << endl;
     Evaluator ev8("3^4");
     cout << ev8.evaluate() << endl;
     Evaluator ev9("6%4");
@@ -76,7 +85,7 @@ int main()
     cout << "++ operator does not work. FIXED" << endl;
     cout << "-- operator does not work. FIXED" << endl;
     cout << "- operator does not work (range error). FIXED" << endl;
-    cout << "\"Evaluator ev18(\"1 + 1\");\" does not work (memory error)." << endl;
+    cout << "\"Evaluator ev18(\"1 + 1\");\" does not work (memory error). FIXED!" << endl;
     Evaluator ev18("100+250");
     cout << ev18.evaluate() << endl;
     system("pause");
