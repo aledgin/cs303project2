@@ -1,5 +1,5 @@
-// Alfred Ledgin
-// 10/31/2015
+// Alfred Ledgin, Luke Simmons, and Megan Sword
+// 11/3/2015
 // CS 303
 // Project 2
 
@@ -16,7 +16,7 @@ Operator::Operator(string input)
 
     // Set precedence based on input.
     if ((input == "(") || (input == ")"))
-        precedence = 9;
+        precedence = 0; // Special precedence for parentheses.
     else if ((input == "!") || (input == "++")
         || (input == "--") || (input == "-#"))
         precedence = 8;
@@ -38,12 +38,12 @@ Operator::Operator(string input)
     else
         throw std::exception("Invalid operator input");
 
-    if (precedence == 9)
-        category = 'p'; // Parentheses have precedence == 9.
+    if (precedence == 0)
+        category = 'p'; // Parentheses have precedence == 0.
     else if (precedence == 8)
         category = 'u'; // Unary operators have precedence == 8.
     else
-        category = 'b'; // Binary operators have precedence < 8.
+        category = 'b'; // Binary operators have precedence in [1, 8].
 
 }
 
