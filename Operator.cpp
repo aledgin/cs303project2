@@ -43,7 +43,7 @@ Operator::Operator(string input)
     else if (precedence == 8)
         category = 'u'; // Unary operators have precedence == 8.
     else
-        category = 'b'; // Binary operators have precedence in [1, 8].
+        category = 'b'; // Binary operators have precedence in [1, 7].
 
 }
 
