@@ -27,13 +27,13 @@ public:
 
     double evaluate() { return evaluate(eqString); }
 
-	bool test(string line);
+
 
 
 private:
 
 
-    bool test(); // We need to write this.
+    bool test(string line); // We need to write this.
 
 
 	string eqString;
