@@ -27,6 +27,8 @@ public:
 
     double evaluate() { return evaluate(eqString); }
 
+	bool test(string line);
+
 
 private:
 
