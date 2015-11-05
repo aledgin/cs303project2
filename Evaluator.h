@@ -31,7 +31,7 @@ public:
 private:
 
 
-    bool test(); // We need to write this.
+    bool test(string equation);
 
 
 	string eqString;
