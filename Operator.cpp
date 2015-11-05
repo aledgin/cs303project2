@@ -9,6 +9,14 @@
 using namespace std;
 
 
+Operator::Operator()
+{
+    type = "(";
+    precedence = 0;
+    category = 'p';
+}
+
+
 Operator::Operator(string input)
 {
 

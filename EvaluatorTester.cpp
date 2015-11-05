@@ -11,6 +11,16 @@ using namespace std;
 
 int main()
 {
+    double hi = 12.567;
+    int hi2 = hi;
+    cout << hi2 << endl;
+    Evaluator temp;
+    cout << temp.evaluate("5+55") << endl;
+    cout << temp.evaluate("!!5") << endl;
+    cout << temp.evaluate("---2") << endl;
+    //cout << temp.evaluate("2 + 3 4") << endl;
+    cout << "***" << endl;
+    cout << "Old test cases:" << endl;
     Evaluator fancy("2*(3*(5+2))");
     cout << fancy.evaluate() << endl;
     Evaluator spaces("1 + 1");
@@ -43,7 +53,7 @@ int main()
     cout << evi.evaluate() << endl;
     Evaluator ev1("1+1");
     cout << ev1.evaluate() << endl;
-    cout << "Note that evaluating an expression results in two identical output strings." << endl;
+    cout << "Note that evaluating an expression results in two identical output strings. FIXED!" << endl;
     Evaluator ev2("1-1");
     cout << ev2.evaluate() << endl;
     Evaluator ev3("0-1");
@@ -79,6 +89,8 @@ int main()
     Evaluator ev16("1<2 && 2>3");
     cout << ev16.evaluate() << endl;
     Evaluator ev17("1<2 || 2>3");
+	Evaluator test(")3+2");
+	cout << test.evaluate() << endl;
     cout << ev17.evaluate() << endl;
     cout << "***Moving on to unary operators...***" << endl;
     cout << "! operator does not work. FIXED" << endl;

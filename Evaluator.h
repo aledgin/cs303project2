@@ -10,22 +10,38 @@
 #include "Operator.h"
 using namespace std;
 
+
 class Evaluator {
+
 public:
+
+
 	Evaluator(string line);
+
+
 	Evaluator();
-	double evaluate(); // Alfred modified...
-	bool test();
-	string getValue();
-	double getTotal() {
-		return numbers.top(); // Alfred modified...
-	}
+
+
+    double evaluate(string equation);
+
+
+    double evaluate() { return evaluate(eqString); }
+
+<<<<<<< HEAD
+
+<<<<<<< HEAD
+
+=======
+>>>>>>> parent of 056ddd3... test function -written by megan
+
+=======
+>>>>>>> b4abc77b9f92b5c6501d1f756ba1436116a88c1c
 private:
-	stack<Operator> opStack;
-    stack<double> numbers; // Alfred added...
-	string equation;
-	string number;
-	int numOfOpenPar;
-	int numOfClosePar;
-	string total;
+
+
+    bool test(string equation);
+
+
+	string eqString;
+
 };

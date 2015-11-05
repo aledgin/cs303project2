@@ -3,7 +3,7 @@
 // 11/4/2015
 // CS 303
 // Project 2
-
+//testing this out
 #include "Evaluator.h"
 using namespace std;
 
@@ -29,8 +29,17 @@ bool Evaluator::test(string equation)
 			string temp;
 			temp += equation[0];
 			temp += equation[1];
-			Operator tempOp = Operator("temp");
-			if (tempOp.hasCategory == 'b')
+            Operator tempOp;
+            try
+            {
+			    tempOp = Operator(temp);
+            }
+            catch(exception)
+            {
+                temp = equation[0];
+                tempOp = Operator(temp);
+            }
+			if (tempOp.hasCategory() == 'b')
 				throw std::invalid_argument("Expressions can't start with binary operators at char: 0");
 		}
 		else
@@ -38,7 +47,7 @@ bool Evaluator::test(string equation)
 			string temp;
 			temp += equation[0];
 			Operator tempOp = Operator("temp");
-			if (tempOp.hasCategory == 'b')
+			if (tempOp.hasCategory() == 'b')
 				throw std::invalid_argument("Expressions can't start with binary operators at char: 0");
 		}
 	}
@@ -61,8 +70,8 @@ bool Evaluator::test(string equation)
 			openParen = true;
 		if ((equation[i] == ')' && openParen == false))
 		{
-			cout << "Expression cannot have a closing parenthesis before an opening parenthesis at char: " << i;
-			return false;
+            string error = "Expression cannot have a closing parenthesis before an opening parenthesis at char: " + i;
+            throw std::invalid_argument(error);
 		}
 	}
 
@@ -72,8 +81,8 @@ bool Evaluator::test(string equation)
 		{
 			if (equation[i + 1] == '0')
 			{
-				cout << "Expression cannot contain division by zero at char: " << i;
-				return false;
+                string error = "Expression cannot contain division by zero at char: " + i;
+                throw std::invalid_argument(error);
 			}
 		}
 	}
@@ -85,17 +94,19 @@ bool Evaluator::test(string equation)
 			if (!isdigit(equation[i + 1]))
 			{
 				string temp;
+                temp += equation[i];
+                temp += equation[i + 1];
+                Operator tempOp;
 				try
 				{
-					temp += equation[i];
-					temp += equation[i + 1];
+                    tempOp = Operator(temp);
 				}
-				catch (exception)
+				catch(exception)
 				{
-					temp += equation[i];
+					temp = equation[i];
+                    tempOp = Operator(temp);
 				}
-				Operator tempOp = Operator("temp");
-				if (tempOp.hasCategory == 'b')
+				if (tempOp.hasCategory() == 'b')
 				{
 					if (tempOp.hasType().length() == 1)
 					{
@@ -107,10 +118,10 @@ bool Evaluator::test(string equation)
 								temp2 += equation[i + 1];
 								temp2 += equation[i + 2];
 								Operator tempOp2 = Operator("temp2");
-								if (tempOp2.hasCategory == 'b')
+								if (tempOp2.hasCategory() == 'b')
 								{
-									cout << "Expression cannot contain two binary operators in a row at char: " << i + 1;
-									return false;
+                                    string error = "Expression cannot contain two binary operators in a row at char: " + (i + 1);
+                                    throw std::invalid_argument(error);
 								}
 							}
 							else
@@ -118,10 +129,10 @@ bool Evaluator::test(string equation)
 								string temp2;
 								temp2 += equation[i + 1];
 								Operator tempOp2 = Operator("temp2");
-								if (tempOp2.hasCategory == 'b')
+								if (tempOp2.hasCategory() == 'b')
 								{
-									cout << "Expression cannot contain two binary operators in a row at char: " << i + 1;
-									return false;
+                                    string error = "Expression cannot contain two binary operators in a row at char: " + (i + 1);
+                                    throw std::invalid_argument(error);
 								}
 							}
 						}
@@ -136,10 +147,10 @@ bool Evaluator::test(string equation)
 								temp2 += equation[i + 2];
 								temp2 += equation[i + 3];
 								Operator tempOp2 = Operator("temp2");
-								if (tempOp2.hasCategory == 'b')
+								if (tempOp2.hasCategory() == 'b')
 								{
-									cout << "Expression cannot contain two binary operators in a row at char: " << i + 2;
-									return false;
+                                    string error = "Expression cannot contain two binary operators in a row at char: " + (i + 2);
+                                    throw std::invalid_argument(error);
 								}
 							}
 							else
@@ -147,10 +158,10 @@ bool Evaluator::test(string equation)
 								string temp2;
 								temp2 += equation[i + 2];
 								Operator tempOp2 = Operator("temp2");
-								if (tempOp2.hasCategory == 'b')
+								if (tempOp2.hasCategory() == 'b')
 								{
-									cout << "Expression cannot contain two binary operators in a row at char: " << i + 2;
-									return false;
+                                    string error = "Expression cannot contain two binary operators in a row at char: " + (i + 2);
+                                    throw std::invalid_argument(error);
 								}
 							}
 						}
@@ -160,12 +171,15 @@ bool Evaluator::test(string equation)
 		}
 	}
 
-	for (int i = 0; i < equation.size() - 2; i++)
+	for (int i = 0; i < equation.size()-2; i++)
 	{
 		if (isdigit(equation[i]))
 			if (equation[i + 1] == ' ')
 				if (isdigit(equation[i + 2]))
-					throw std::invalid_argument("Expression cannot have two operands in a row at char: ");
+                {
+                    string error = "Expression cannot have two operands in a row at char: " + (i + 2);
+					throw std::invalid_argument(error);
+                }
 	}
 
 	for (int i = 0; i < equation.size(); i++)				//checks to make sure there are no unary operators followed by a binary operator
@@ -185,7 +199,7 @@ bool Evaluator::test(string equation)
 					temp += equation[i];
 				}
 				Operator tempOp = Operator("temp");
-				if (tempOp.hasCategory == 'u')
+				if (tempOp.hasCategory() == 'u')
 				{
 					if (tempOp.hasType().length() == 1)
 					{
@@ -197,10 +211,10 @@ bool Evaluator::test(string equation)
 								temp2 += equation[i + 1];
 								temp2 += equation[i + 2];
 								Operator tempOp2 = Operator("temp2");
-								if (tempOp2.hasCategory == 'u')
+								if (tempOp2.hasCategory() == 'u')
 								{
-									cout << "Expression cannot contain two binary operators in a row at char: " << i + 1;
-									return false;
+                                    string error = "Expression cannot contain two binary operators in a row at char: " + (i + 1);
+                                    throw std::invalid_argument(error);
 								}
 							}
 							else
@@ -208,10 +222,10 @@ bool Evaluator::test(string equation)
 								string temp2;
 								temp2 += equation[i + 1];
 								Operator tempOp2 = Operator("temp2");
-								if (tempOp2.hasCategory == 'u')
+								if (tempOp2.hasCategory() == 'u')
 								{
-									cout << "Expression cannot contain two binary operators in a row at char: " << i + 1;
-									return false;
+                                    string error = "Expression cannot contain two binary operators in a row at char: " + (i + 1);
+                                    throw invalid_argument(error);
 								}
 							}
 						}
@@ -226,10 +240,10 @@ bool Evaluator::test(string equation)
 								temp2 += equation[i + 2];
 								temp2 += equation[i + 3];
 								Operator tempOp2 = Operator("temp2");
-								if (tempOp2.hasCategory == 'u')
+								if (tempOp2.hasCategory() == 'u')
 								{
-									cout << "Expression cannot contain two binary operators in a row at char: " << i + 2;
-									return false;
+                                    string error = "Expression cannot contain two binary operators in a row at char: " + (i + 2);
+                                    throw std::invalid_argument(error);
 								}
 							}
 							else
@@ -237,10 +251,10 @@ bool Evaluator::test(string equation)
 								string temp2;
 								temp2 += equation[i + 2];
 								Operator tempOp2 = Operator("temp2");
-								if (tempOp2.hasCategory == 'u')
+								if (tempOp2.hasCategory() == 'u')
 								{
-									cout << "Expression cannot contain two binary operators in a row at char: " << i + 2;
-									return false;
+                                    string error = "Expression cannot contain two binary operators in a row at char: " + (i + 2);
+                                    throw std::invalid_argument(error);
 								}
 							}
 						}
@@ -253,7 +267,9 @@ bool Evaluator::test(string equation)
 
 
 double Evaluator::evaluate(string equation) {
-	test(equation);
+
+    test(equation);
+
 	stack<Operator> opStack;
 	stack<double> numbers;
 	int index = 0;
