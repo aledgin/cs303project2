@@ -11,7 +11,9 @@ using namespace std;
 
 Operator::Operator()
 {
-    Operator("(");
+    type = "(";
+    precedence = 0;
+    category = 'p';
 }
 
 
