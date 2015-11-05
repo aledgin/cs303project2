@@ -1,5 +1,5 @@
 // Alfred Ledgin, Luke Simmons, and Megan Sword
-// 11/3/2015
+// 11/4/2015
 // CS 303
 // Project 2
 
@@ -19,40 +19,9 @@ Operator::Operator()
 
 Operator::Operator(string input)
 {
-
     type = input;
-
-    // Set precedence based on input.
-    if ((input == "(") || (input == ")"))
-        precedence = 0; // Special precedence for parentheses.
-    else if ((input == "!") || (input == "++")
-        || (input == "--") || (input == "-#"))
-        precedence = 8;
-    else if (input == "^")
-        precedence = 7;
-    else if ((input == "*") || (input == "/") || (input == "%"))
-        precedence = 6;
-    else if ((input == "+") || (input == "-"))
-        precedence = 5;
-    else if ((input == "<") || (input == "<=")
-        || (input == ">=") || (input == ">"))
-        precedence = 4;
-    else if ((input == "==") || (input == "!="))
-        precedence = 3;
-    else if (input == "&&")
-        precedence = 2;
-    else if (input == "||")
-        precedence = 1;
-    else
-        throw std::exception("Invalid operator input");
-
-    if (precedence == 0)
-        category = 'p'; // Parentheses have precedence == 0.
-    else if (precedence == 8)
-        category = 'u'; // Unary operators have precedence == 8.
-    else
-        category = 'b'; // Binary operators have precedence in [1, 7].
-
+    setPrecedence();
+    setCategory();
 }
 
 
@@ -132,4 +101,42 @@ const double Operator::execute(double lhs, double rhs) const
     else // Cannot use this function with unary operator or parentheses.
         throw std::exception("Cannot have lhs operand.");
 
+}
+
+
+void Operator::setPrecedence()
+{
+    if ((type == "(") || (type == ")"))
+        precedence = 0; // Special precedence for parentheses.
+    else if ((type == "!") || (type == "++")
+        || (type == "--") || (type == "-#"))
+        precedence = 8;
+    else if (type == "^")
+        precedence = 7;
+    else if ((type == "*") || (type == "/") || (type == "%"))
+        precedence = 6;
+    else if ((type == "+") || (type == "-"))
+        precedence = 5;
+    else if ((type == "<") || (type == "<=")
+        || (type == ">=") || (type == ">"))
+        precedence = 4;
+    else if ((type == "==") || (type == "!="))
+        precedence = 3;
+    else if (type == "&&")
+        precedence = 2;
+    else if (type == "||")
+        precedence = 1;
+    else
+        throw std::exception("Invalid operator input");
+}
+
+
+void Operator::setCategory()
+{
+    if (precedence == 0)
+        category = 'p'; // Parentheses have precedence == 0.
+    else if (precedence == 8)
+        category = 'u'; // Unary operators have precedence == 8.
+    else
+        category = 'b'; // Binary operators have precedence in [1, 7].
 }
