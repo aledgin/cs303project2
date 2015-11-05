@@ -28,10 +28,16 @@ public:
     double evaluate() { return evaluate(eqString); }
 
 
+
+
 private:
 
 
+<<<<<<< HEAD
     bool test(string equation);
+=======
+    bool test(string line); // We need to write this.
+>>>>>>> origin/master
 
 
 	string eqString;
