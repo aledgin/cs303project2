@@ -19,7 +19,7 @@ Evaluator::Evaluator(string line) {
 
 
 double Evaluator::evaluate(string equation) {
-
+	test(equation);
     stack<Operator> opStack;
     stack<double> numbers;
 	int index = 0;

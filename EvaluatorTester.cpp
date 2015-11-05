@@ -87,6 +87,8 @@ int main()
     Evaluator ev16("1<2 && 2>3");
     cout << ev16.evaluate() << endl;
     Evaluator ev17("1<2 || 2>3");
+	Evaluator test(")3+2");
+	cout << test.evaluate() << endl;
     cout << ev17.evaluate() << endl;
     cout << "***Moving on to unary operators...***" << endl;
     cout << "! operator does not work. FIXED" << endl;
