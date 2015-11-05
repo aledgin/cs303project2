@@ -17,6 +17,8 @@ int main()
     Evaluator temp;
     cout << temp.evaluate("5+55") << endl;
     cout << temp.evaluate("!!5") << endl;
+    cout << temp.evaluate("---2") << endl;
+    //cout << temp.evaluate("2 + 3 4") << endl;
     cout << "***" << endl;
     cout << "Old test cases:" << endl;
     Evaluator fancy("2*(3*(5+2))");

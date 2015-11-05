@@ -12,6 +12,11 @@ using namespace std;
 
 int main()
 {
+    Operator generic;
+    cout << generic.hasPrecedence() << endl;
+    cout << generic.hasType() << endl;
+    Operator bob("+");
+    cout << bob.hasType() << endl;
     try
     {Operator fake("abc");}
     catch(exception)
