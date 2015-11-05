@@ -9,6 +9,12 @@
 using namespace std;
 
 
+Operator::Operator()
+{
+    Operator("(");
+}
+
+
 Operator::Operator(string input)
 {
 

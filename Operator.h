@@ -16,6 +16,11 @@ class Operator
 
     public:
 
+        Operator();
+        // Preconditions: A generic Operator object needs to be created.
+        // Postconditions: This default constructor creates an operator
+            // of type "(" and sets the corresponding variables appropriately.
+
         Operator(string input);
         // Preconditions: An operator needs to be constructed from a given
             // string.

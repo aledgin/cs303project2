@@ -29,14 +29,17 @@ public:
 
 <<<<<<< HEAD
 
+<<<<<<< HEAD
 
 =======
 >>>>>>> parent of 056ddd3... test function -written by megan
 
+=======
+>>>>>>> b4abc77b9f92b5c6501d1f756ba1436116a88c1c
 private:
 
 
-    bool test(string line); // We need to write this.
+    bool test(string equation);
 
 
 	string eqString;
