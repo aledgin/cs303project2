@@ -1,5 +1,5 @@
 // Alfred Ledgin
-// 10/31/2015
+// 11/4/2015
 // CS 303
 // Project 2
 
@@ -20,6 +20,7 @@ class Operator
         // Preconditions: A generic Operator object needs to be created.
         // Postconditions: This default constructor creates an operator
             // of type "(" and sets the corresponding variables appropriately.
+
 
         Operator(string input);
         // Preconditions: An operator needs to be constructed from a given
@@ -107,6 +108,20 @@ class Operator
 
 
     private:
+
+
+        void setPrecedence();
+        // Preconditions: An operator with a given type is being constructed.
+        // Postconditions: This function sets the operator's precedence
+            // based on its type.
+
+
+        void setCategory();
+        // Preconditions: An operator with a given precedence is being
+            // constructed.
+        // Postconditions: This function sets the operator's category
+            // based on its precedence.
+
 
         int precedence;
         string type;

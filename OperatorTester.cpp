@@ -1,6 +1,6 @@
 // FOR TESTING ONLY--DO NOT TURN IN
 // Alfred Ledgin
-// 10/31/2015
+// 11/4/2015
 // CS 303
 // Project 2
 
@@ -12,8 +12,14 @@ using namespace std;
 
 int main()
 {
+    Operator power("^");
+    cout << power.execute(-4, 0.5) << endl;
+    cout << power.execute(4, -2) << endl;
+    cout << "Old test cases:" << endl;
     Operator generic;
     cout << generic.hasPrecedence() << endl;
+    cout << generic.hasType() << endl;
+    generic = Operator("!");
     cout << generic.hasType() << endl;
     Operator bob("+");
     cout << bob.hasType() << endl;
