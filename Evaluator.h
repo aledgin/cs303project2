@@ -27,8 +27,11 @@ public:
 
     double evaluate() { return evaluate(eqString); }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> parent of 056ddd3... test function -written by megan
 
 private:
 
