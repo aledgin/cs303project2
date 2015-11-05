@@ -16,7 +16,7 @@ Evaluator::Evaluator() {
 Evaluator::Evaluator(string line) {
 	eqString = line;
 }
-
+/*
 bool Evaluator::test(string equation)
 {
 	if (equation[0] == ')')				//checks if equation starts with closing parenthesis
@@ -29,16 +29,16 @@ bool Evaluator::test(string equation)
 			string temp;
 			temp += equation[0];
 			temp += equation[1];
-            Operator tempOp;
-            try
-            {
-			    tempOp = Operator(temp);
-            }
-            catch(exception)
-            {
-                temp = equation[0];
-                tempOp = Operator(temp);
-            }
+			Operator tempOp("-");
+			try
+			{
+				tempOp = Operator(temp);
+			}
+			catch (exception)
+			{
+				temp = equation[0];
+				tempOp = Operator(temp);
+			}
 			if (tempOp.hasCategory() == 'b')
 				throw std::invalid_argument("Expressions can't start with binary operators at char: 0");
 		}
@@ -70,8 +70,8 @@ bool Evaluator::test(string equation)
 			openParen = true;
 		if ((equation[i] == ')' && openParen == false))
 		{
-            string error = "Expression cannot have a closing parenthesis before an opening parenthesis at char: " + i;
-            throw std::invalid_argument(error);
+			string error = "Expression cannot have a closing parenthesis before an opening parenthesis at char: " + i;
+			throw std::invalid_argument(error);
 		}
 	}
 
@@ -81,8 +81,8 @@ bool Evaluator::test(string equation)
 		{
 			if (equation[i + 1] == '0')
 			{
-                string error = "Expression cannot contain division by zero at char: " + i;
-                throw std::invalid_argument(error);
+				string error = "Expression cannot contain division by zero at char: " + i;
+				throw std::invalid_argument(error);
 			}
 		}
 	}
@@ -94,17 +94,17 @@ bool Evaluator::test(string equation)
 			if (!isdigit(equation[i + 1]))
 			{
 				string temp;
-                temp += equation[i];
-                temp += equation[i + 1];
-                Operator tempOp;
+				temp += equation[i];
+				temp += equation[i + 1];
+				Operator tempOp("-");
 				try
 				{
-                    tempOp = Operator(temp);
+					tempOp = Operator(temp);
 				}
-				catch(exception)
+				catch (exception)
 				{
 					temp = equation[i];
-                    tempOp = Operator(temp);
+					tempOp = Operator(temp);
 				}
 				if (tempOp.hasCategory() == 'b')
 				{
@@ -120,8 +120,8 @@ bool Evaluator::test(string equation)
 								Operator tempOp2 = Operator(temp2);
 								if (tempOp2.hasCategory() == 'b')
 								{
-                                    string error = "Expression cannot contain two binary operators in a row at char: " + (i + 1);
-                                    throw std::invalid_argument(error);
+									string error = "Expression cannot contain two binary operators in a row at char: " + (i + 1);
+									throw std::invalid_argument(error);
 								}
 							}
 							else
@@ -131,8 +131,8 @@ bool Evaluator::test(string equation)
 								Operator tempOp2 = Operator(temp2);
 								if (tempOp2.hasCategory() == 'b')
 								{
-                                    string error = "Expression cannot contain two binary operators in a row at char: " + (i + 1);
-                                    throw std::invalid_argument(error);
+									string error = "Expression cannot contain two binary operators in a row at char: " + (i + 1);
+									throw std::invalid_argument(error);
 								}
 							}
 						}
@@ -147,11 +147,11 @@ bool Evaluator::test(string equation)
 								temp2 += equation[i + 2];
 								temp2 += equation[i + 3];
 								Operator tempOp2 = Operator(temp2);
-								if (tempOp2.hasCategory() == 'b')
-								{
-                                    string error = "Expression cannot contain two binary operators in a row at char: " + (i + 2);
-                                    throw std::invalid_argument(error);
-								}
+								//if (tempOp2.hasCategory() == 'b')
+								//{
+									//string error = "Expression cannot contain two binary operators in a row at char: " + (i + 2);
+									//throw std::invalid_argument(error);
+								//}
 							}
 							else
 							{
@@ -160,8 +160,8 @@ bool Evaluator::test(string equation)
 								Operator tempOp2 = Operator(temp2);
 								if (tempOp2.hasCategory() == 'b')
 								{
-                                    string error = "Expression cannot contain two binary operators in a row at char: " + (i + 2);
-                                    throw std::invalid_argument(error);
+									string error = "Expression cannot contain two binary operators in a row at char: " + (i + 2);
+									throw std::invalid_argument(error);
 								}
 							}
 						}
@@ -171,15 +171,15 @@ bool Evaluator::test(string equation)
 		}
 	}
 
-	for (int i = 0; i < equation.size()-2; i++)
+	for (int i = 0; i < equation.size() - 2; i++)
 	{
 		if (isdigit(equation[i]))
 			if (equation[i + 1] == ' ')
 				if (isdigit(equation[i + 2]))
-                {
-                    string error = "Expression cannot have two operands in a row at char: " + (i + 2);
+				{
+					string error = "Expression cannot have two operands in a row at char: " + (i + 2);
 					throw std::invalid_argument(error);
-                }
+				}
 	}
 
 	for (int i = 0; i < equation.size(); i++)				//checks to make sure there are no unary operators followed by a binary operator
@@ -213,8 +213,8 @@ bool Evaluator::test(string equation)
 								Operator tempOp2 = Operator(temp2);
 								if (tempOp2.hasCategory() == 'b')
 								{
-                                    string error = "Expression cannot contain a unary followed by a binary: " + (i + 1);
-                                    throw std::invalid_argument(error);
+									string error = "Expression cannot contain a unary followed by a binary: " + (i + 1);
+									throw std::invalid_argument(error);
 								}
 							}
 							else
@@ -224,8 +224,8 @@ bool Evaluator::test(string equation)
 								Operator tempOp2 = Operator(temp2);
 								if (tempOp2.hasCategory() == 'b')
 								{
-                                    string error = "Expression cannot contain a unary followed by a binary : " + (i + 1);
-                                    throw invalid_argument(error);
+									string error = "Expression cannot contain a unary followed by a binary : " + (i + 1);
+									throw invalid_argument(error);
 								}
 							}
 						}
@@ -242,8 +242,8 @@ bool Evaluator::test(string equation)
 								Operator tempOp2 = Operator("temp2");
 								if (tempOp2.hasCategory() == 'u')
 								{
-                                    string error = "Expression cannot contain two binary operators in a row at char: " + (i + 2);
-                                    throw std::invalid_argument(error);
+									string error = "Expression cannot contain two binary operators in a row at char: " + (i + 2);
+									throw std::invalid_argument(error);
 								}
 							}
 							else
@@ -253,8 +253,8 @@ bool Evaluator::test(string equation)
 								Operator tempOp2 = Operator("temp2");
 								if (tempOp2.hasCategory() == 'b')
 								{
-                                    string error = "Expression cannot contain two binary operators in a row at char: " + (i + 2);
-                                    throw std::invalid_argument(error);
+									string error = "Expression cannot contain two binary operators in a row at char: " + (i + 2);
+									throw std::invalid_argument(error);
 								}
 							}
 						}
@@ -264,12 +264,13 @@ bool Evaluator::test(string equation)
 		}
 	}
 }
-
+*/
 
 double Evaluator::evaluate(string equation) {
 
-    test(equation);
-
+	//test(equation);
+	bool hitNumber = false;
+	bool hitOperator = false;
 	stack<Operator> opStack;
 	stack<double> numbers;
 	int index = 0;
@@ -302,16 +303,23 @@ double Evaluator::evaluate(string equation) {
 		}
 
 		else if (isdigit(equation[index])) { // If the item is a digit, build the number until the item is no longer a digit.
+			if (hitOperator == false && !numbers.empty()) {
+				string error = "Expression cannot have two operands in a row @ " + index;
+				throw std::invalid_argument(error);
+			}
+			hitNumber = true;
 			double newOperand = 0;
 			string newOperandString;
 			while (isdigit(equation[index])) {
 				newOperandString += equation[index];
 				index++;
 			}
+			hitOperator = false;
 			numbers.push(stoi(newOperandString));
 		}
 
 		else { // The item must be an operator.
+			hitOperator = true;
 			string temp;
 			temp += equation[index];
 			if (index == 0 && temp == "-")
@@ -330,9 +338,6 @@ double Evaluator::evaluate(string equation) {
 			index++;
 			if (!isdigit(equation[index]) && equation[index] != '('
 				&& equation[index] != ')' && equation[index] != '!') { // Check whether the operator contains 2 characters.
-				while (equation[index] == ' ') {
-					index++;
-				}
 				if (equation[index - 1] == equation[index] || equation[index - 1] == '!'
 					|| equation[index - 1] == '<' || equation[index - 1] == '>') // Check for valid two-char operator.
 				{
@@ -367,7 +372,16 @@ double Evaluator::evaluate(string equation) {
 			}
 			Operator tempO = Operator(temp);
 			if (opStack.empty()) {
+				if (hitNumber == false && tempO.hasCategory() == 'b' && numbers.empty()) {
+					string message = "cannot start expression with binary operator @ "+ index;
+					throw invalid_argument(message);
+				}
+				else if (hitNumber == false && temp == ")" && numbers.empty()) {
+					string message = "cannot start expression with closing parenthesis @ " + index;
+					throw invalid_argument(message);
+				}
 				opStack.push(tempO);
+				hitNumber = false;
 			}
 			else if (tempO < opStack.top()) {
 				while (!opStack.empty() && tempO < opStack.top()) {
@@ -389,7 +403,22 @@ double Evaluator::evaluate(string equation) {
 				opStack.push(tempO);
 			}
 			else {
+				if (!opStack.empty()) {
+					if (tempO.hasCategory() == 'b' && opStack.top().hasCategory() == 'b' && hitNumber == false) {
+						string message = "cannot have two binary operators in a row @ " + index;
+						throw invalid_argument(message);
+					}
+					else if (tempO.hasCategory() == 'u' && opStack.top().hasCategory() == 'b' && hitNumber == false) {
+						string message = "cannot have a unary operator followed by a binary operator @ " + index;
+						throw invalid_argument(message);
+					}
+					else if (temp == ")") {
+						string message = "closing brace before opening " + index;
+						throw invalid_argument(message);
+					}
+				}
 				opStack.push(tempO);
+				hitNumber = false;
 			}
 		}
 
