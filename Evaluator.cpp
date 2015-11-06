@@ -43,7 +43,7 @@ const double Evaluator::evaluate(string equation) {
 				subIdx++;
                 if (subIdx > equation.length() - 1)
                 {
-                    string error = "parenthesis error @ char " + to_string(equation.length() - 1);
+                    string error = "missing closing parenthesis @ char " + to_string(equation.length() - 1);
                     throw invalid_argument(error);
                 }
 				if (equation[subIdx] == '(')
@@ -136,12 +136,12 @@ const double Evaluator::evaluate(string equation) {
             }
             catch(exception)
             {
-                string error = "operator error @ char " + to_string(index - 1);
+                string error = "improper operator combination @ char " + to_string(index - 1);
                 throw invalid_argument(error);
             }
             if (tempO.hasType() == ")") // Misplaced closing parenthesis.
             {
-                string error = "parenthesis error @ char " + to_string(index - 1);
+                string error = "misplaced closing parenthesis @ char " + to_string(index - 1);
                 throw invalid_argument(error);
             }
 			if (opStack.empty()) {
