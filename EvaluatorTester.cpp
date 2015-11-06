@@ -7,10 +7,54 @@
 #include <iostream>
 #include <string>
 #include "Evaluator.h"
+#include "EvalOutput.h"
 using namespace std;
 
 int main()
 {
+    EvalOutput final2("1+2(3+4)");
+    final2.report();
+    final2.report("1+2+()+3");
+    EvalOutput final("1+2*3");
+    final.report();
+    final.report("2+2^2*3");
+    final.report("1==2");
+    final.report("1+3 > 2");
+    final.report("(4>=4) && 0");
+    final.report("(1+2)*3");
+    final.report("++++2-5*(3^2)");
+    final.report("! 1");
+    final.report("++2");
+    final.report("--2");
+    final.report("-1");
+    final.report("2^3");
+    final.report("6 * 2");
+    final.report("6 - 2");
+    final.report("6 > 5");
+    final.report("6!=5");
+    final.report("6>5 && 4>5");
+    final.report("1 || 0");
+    final.report(")3+2");
+    final.report("<3+2");
+    final.report("3&&&& 5");
+    final.report("15+3 2");
+    final.report("10+ ++<3");
+    final.report("1/0");
+
+    cout << "*** Old tests: All OK" << endl;
+    EvalOutput output("1+(1+1");
+    output.report();
+    output.report("1+)3*3");
+    output.report("1)3*3");
+    EvalOutput output2;
+    output2.report();
+    output2.report("1<<100");
+    output2.report("1!+2");
+    output2.report("(2 + 2) = 5");
+    output2.report("(2 + 2) == 5");
+    Evaluator goodness("  6 %   4 ");
+    cout << goodness.evaluate() << endl;
+    cout << "*** Older test cases:" << endl;
 	double hi = 12.567;
 	int hi2 = hi;
 	cout << hi2 << endl;
