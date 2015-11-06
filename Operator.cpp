@@ -20,6 +20,7 @@ Operator::Operator()
 Operator::Operator(string input)
 {
     type = input;
+    fixType();
     setPrecedence();
     setCategory();
 }
@@ -139,4 +140,20 @@ void Operator::setCategory()
         category = 'u'; // Unary operators have precedence == 8.
     else
         category = 'b'; // Binary operators have precedence in [1, 7].
+}
+
+
+void Operator::fixType()
+{
+    if (type.length() > 1)
+    {
+        if (type[1] == ' ')
+        {
+            type = type.substr(0, 1);
+            // Reference (for using substr function):
+                // "std::string::substr." _cplusplus.com_. cplusplus.com, 2015.
+                    // Web. 4 Nov. 2015.
+                    // <http://www.cplusplus.com/reference/string/string/substr/>.
+        }
+    }
 }

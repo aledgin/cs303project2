@@ -123,6 +123,13 @@ class Operator
             // based on its precedence.
 
 
+        void fixType();
+        // Preconditions: An operator's given type mave have an unintended
+            // space.
+        // Postconditions: This removes an untended space from an operator's
+            // type.
+
+
         int precedence;
         string type;
         char category;

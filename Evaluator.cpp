@@ -89,7 +89,8 @@ const double Evaluator::evaluate(string equation) {
 			}
 			else if (equation.length() > index + 1)
 			{
-				if (temp == "-" && !isdigit(equation[index - 1]) && equation[index + 1] != '-')
+				if (temp == "-" && !isdigit(equation[index - 1])
+                    && equation[index + 1] != '-' && equation[index + 1] != ' ')
 					// If the operator is a -, and the preceding character is not a digit,
 					    // then the operator is the negation operator.
 					temp += "#";
@@ -175,6 +176,11 @@ const double Evaluator::evaluate(string equation) {
 					else if (opStack.top().hasCategory() == 'b') {
 						double tempNum1 = numbers.top();
 						numbers.pop();
+                        if (numbers.empty())
+                        {
+                            string error = "improper operator combination @ char " + to_string(index - 1);
+                            throw invalid_argument(error);
+                        }
 						double tempNum2 = numbers.top();
 						numbers.pop();
                         try
@@ -233,6 +239,11 @@ const double Evaluator::evaluate(string equation) {
 		if (opStack.top().hasCategory() == 'b') {
 			double tempNum1 = numbers.top();
 			numbers.pop();
+            if (numbers.empty())
+            {
+                string error = "improper operator combination @ char " + to_string(index - 1);
+                throw invalid_argument(error);
+            }
 			double tempNum2 = numbers.top();
 			numbers.pop();
             try
@@ -248,6 +259,9 @@ const double Evaluator::evaluate(string equation) {
 		}
 	}
 
-	return numbers.top();
+    if (numbers.size() == 1)
+        return numbers.top();
+    else
+        throw invalid_argument("too many operands, improper grouping");
 
 }
