@@ -20,6 +20,9 @@ Evaluator::Evaluator(string line) {
 
 const double Evaluator::evaluate(string equation) {
 
+    if (equation.length() == 0)
+        throw invalid_argument("expression cannot be empty");
+
 	bool hitNumber = false;
 	bool hitOperator = false;
 	stack<Operator> opStack;
@@ -37,7 +40,12 @@ const double Evaluator::evaluate(string equation) {
 			int parens = 1;
 			while (parens > 0)
 			{
-				subIdx++; // Need error protection.
+				subIdx++;
+                if (subIdx > equation.length() - 1)
+                {
+                    string error = "parenthesis error @ char " + to_string(equation.length() - 1);
+                    throw invalid_argument(error);
+                }
 				if (equation[subIdx] == '(')
 					parens++;
 				if (equation[subIdx] == ')')
@@ -55,7 +63,7 @@ const double Evaluator::evaluate(string equation) {
 
 		else if (isdigit(equation[index])) { // If the item is a digit, build the number until the item is no longer a digit.
 			if (hitOperator == false && !numbers.empty()) {
-				string error = "Expression cannot have two operands in a row @ " + to_string(index);
+				string error = "expression cannot have two operands in a row @ char " + to_string(index);
 				throw std::invalid_argument(error);
 			}
 			hitNumber = true;
@@ -121,14 +129,28 @@ const double Evaluator::evaluate(string equation) {
 					}
 				}
 			}
-			Operator tempO = Operator(temp);
+            Operator tempO; // Create new operator and test it for errors.
+            try
+            {
+			    tempO = Operator(temp);
+            }
+            catch(exception)
+            {
+                string error = "operator error @ char " + to_string(index - 1);
+                throw invalid_argument(error);
+            }
+            if (tempO.hasType() == ")") // Misplaced closing parenthesis.
+            {
+                string error = "parenthesis error @ char " + to_string(index - 1);
+                throw invalid_argument(error);
+            }
 			if (opStack.empty()) {
 				if (hitNumber == false && tempO.hasCategory() == 'b' && numbers.empty()) {
-					string message = "cannot start expression with binary operator @ " + to_string(index);
+					string message = "cannot start expression with binary operator @ char " + to_string(index - 1);
 					throw invalid_argument(message);
 				}
 				else if (hitNumber == false && temp == ")" && numbers.empty()) {
-					string message = "cannot start expression with closing parenthesis @ " + to_string(index);
+					string message = "cannot start expression with closing parenthesis @ char " + to_string(index - 1);
 					throw invalid_argument(message);
 				}
 				opStack.push(tempO);
@@ -145,7 +167,7 @@ const double Evaluator::evaluate(string equation) {
 						}
                         catch(exception)
                         {
-                            string message = "division by zero @ " + to_string(index);
+                            string message = "division by zero @ char " + to_string(index);
                             throw invalid_argument(message);
                         }
 						opStack.pop();
@@ -161,7 +183,7 @@ const double Evaluator::evaluate(string equation) {
                         }
                         catch (exception)
                         {
-                            string message = "division by zero @ " + to_string(index);
+                            string message = "division by zero @ char " + to_string(index);
                             throw invalid_argument(message);
                         }
 						opStack.pop();
@@ -172,15 +194,15 @@ const double Evaluator::evaluate(string equation) {
 			else {
 				if (!opStack.empty()) {
 					if (tempO.hasCategory() == 'b' && opStack.top().hasCategory() == 'b' && hitNumber == false) {
-						string message = "cannot have two binary operators in a row @ " + to_string(index);
+						string message = "cannot have two binary operators in a row @ char " + to_string(index);
 						throw invalid_argument(message);
 					}
 					else if (tempO.hasCategory() == 'b' && opStack.top().hasCategory() == 'u' && hitNumber == false) {
-						string message = "cannot have a unary operator followed by a binary operator @ " + to_string(index);
+						string message = "cannot have a unary operator followed by a binary operator @ char " + to_string(index);
 						throw invalid_argument(message);
 					}
 					else if (temp == ")") {
-						string message = "closing brace before opening @ " + to_string(index);
+						string message = "closing brace before opening @ char " + to_string(index);
 						throw invalid_argument(message);
 					}
 				}
@@ -201,7 +223,7 @@ const double Evaluator::evaluate(string equation) {
             }
             catch (exception)
             {
-                string message = "division by zero @ " + to_string(index);
+                string message = "division by zero @ char " + to_string(index);
                 throw invalid_argument(message);
             }
 			opStack.pop();
@@ -219,7 +241,7 @@ const double Evaluator::evaluate(string equation) {
             }
             catch (exception)
             {
-                string message = "division by zero @ " + to_string(index);
+                string message = "division by zero @ char " + to_string(index);
                 throw invalid_argument(message);
             }
 			opStack.pop();
