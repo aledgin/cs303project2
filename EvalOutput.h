@@ -55,11 +55,11 @@ class EvalOutput
             catch (invalid_argument& error)
             {
                 cout << "Error: " << error.what() << endl;
-                // Reference:
-                    // "std::invalid_argument." _cplusplus.com_.
-                        // cplusplus.com, 2015. Web. 5 Nov. 2015.
-                        // <http://www.cplusplus.com/reference/stdexcept/invalid_argument/>.
             }
+            // Reference:
+                // "std::invalid_argument." _cplusplus.com_.
+                    // cplusplus.com, 2015. Web. 5 Nov. 2015.
+                    // <http://www.cplusplus.com/reference/stdexcept/invalid_argument/>.
         }
 
 
